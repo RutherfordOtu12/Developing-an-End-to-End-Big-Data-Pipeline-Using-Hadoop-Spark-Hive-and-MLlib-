@@ -1,0 +1,5 @@
+In this project, the emphasis was placed on fraud detection in the banking sector. Big data analytics have become an essential part of any strategy to help detect and prevent financial crime,
+owing to the ever-evolving attack methods used by criminals exploiting multichannel vulnerabilities to compromise technology systems.
+According to Agarwal and Mittal (2014), as stated in More and Moily (2021), Big Data has enabled banks to implement real time analytics on a large scale to meet the growing threats.
+Using data mining fraud detection techniques that detects both known and novel fraud instances as they occur in real time, 
+with a higher level of accuracy using distributed Hadoop-based platforms like the Google Cloud DataProc, makes it possible to cost-effectively and efficiently store and process large data sets (Agarwal & Mittal, 2014). 
