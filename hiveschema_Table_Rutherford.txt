@@ -1,0 +1,28 @@
+
+-- ----------------------------------------------------------------------------
+#creating hive table to load cleaned data from GC
+--------------------------------------------------------------------------
+CREATE EXTERNAL TABLE IF NOT EXISTS bank_transactions_processed (
+    Txn_Date DATE,
+    Description STRING,
+    Deposits DOUBLE,
+    Withdrawls DOUBLE,
+    Balance DOUBLE,
+    Net_Change DOUBLE,
+    Day INT,
+    Month INT,
+    Year INT,
+    Weekday STRING,
+    Week_Num INT,
+    Prev_Balance DOUBLE,
+    Balance_Drop DOUBLE,
+    Rolling_Withdrawals_3 DOUBLE,
+    Txn_Count INT,
+    Large_Withdrawal_Flag INT,
+    Txn_Type STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION 'gs://bigassiiignment/processed/bank_data_for_eda_v2';
+

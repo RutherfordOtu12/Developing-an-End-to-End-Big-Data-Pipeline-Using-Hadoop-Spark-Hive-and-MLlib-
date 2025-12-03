@@ -1,0 +1,47 @@
+#Overall summary statistics for numerical fields
+
+INSERT OVERWRITE DIRECTORY 'gs://bigassiiignment/eda/summary_stats/'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT
+  COUNT(*) AS Total_Transactions,
+  ROUND(SUM(Withdrawls), 2) AS Total_Withdrawals,
+  ROUND(SUM(Deposits), 2) AS Total_Deposits,
+  ROUND(AVG(Withdrawls), 2) AS Avg_Withdrawal,
+  ROUND(AVG(Deposits), 2) AS Avg_Deposit,
+  ROUND(MAX(Withdrawls), 2) AS Max_Withdrawal,
+  ROUND(MAX(Deposits), 2) AS Max_Deposit,
+  ROUND(MIN(Withdrawls), 2) AS Min_Withdrawal,
+  ROUND(MIN(Deposits), 2) AS Min_Deposit,
+  ROUND(AVG(Balance), 2) AS Avg_Balance
+FROM bank_transactions_processed;
+
+#Monthly Withdrawals and deposits (Identifies trends over time—e.g., peak spending or earning periods per month)
+
+INSERT OVERWRITE DIRECTORY 'gs://bigassiiignment/eda/statistics/monthly_totals/'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT
+  Year,
+  Month,
+  ROUND(SUM(Withdrawls), 2) AS Total_Withdrawals,
+  ROUND(SUM(Deposits), 2) AS Total_Deposits
+FROM bank_transactions_processed
+GROUP BY Year, Month
+ORDER BY Year, Month;
+
+
+#Transaction type frequency(for understanding the nature of banking activity, eg. How often POS, cash and online banking is used)
+
+INSERT OVERWRITE DIRECTORY 'gs://bigassiiignment/eda/statistics/txn_type_summary/'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT
+  Txn_Type,
+  COUNT(*) AS Frequency,
+  ROUND(SUM(Withdrawls), 2) AS Total_Withdrawn,
+  ROUND(SUM(Deposits), 2) AS Total_Deposited
+FROM bank_transactions_processed
+GROUP BY Txn_Type
+ORDER BY Frequency DESC;
+
